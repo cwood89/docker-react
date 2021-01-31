@@ -1,0 +1,16 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+# could get away without this due to docker-compose, would definetly be needed in PROD
+COPY . .
+
+CMD ["npm", "run", "start"]
+
+# docker volumes
+# docker run (maps to external port)-p 3000:3000 (creates reference to modules in container)-v /app/node_modules (creates reference between local files and container files)-v $(pwd):/app c4c5bf77c32f
+
+# run tests
+# docker run -it <image> npm run test
